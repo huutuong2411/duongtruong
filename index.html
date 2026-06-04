@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duong Truong Soundboard</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #1f1f1f;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            display: grid;
+            gap: 15px;
+        }
+
+        button {
+            height: 80px;
+            border: none;
+            border-radius: 16px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🎵 Soundboard</h1>
+
+    <div class="container">
+        <button onclick="playSound('sound1')">
+            🔊 Âm thanh 1
+        </button>
+
+        <button onclick="playSound('sound2')">
+            🔊 Âm thanh 2
+        </button>
+    </div>
+
+    <audio id="sound1" src="sounds/sound1.mp3"></audio>
+    <audio id="sound2" src="sounds/sound2.mp3"></audio>
+
+    <script>
+        let currentAudio = null;
+
+        function playSound(id) {
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+            }
+
+            const audio = document.getElementById(id);
+
+            currentAudio = audio;
+
+            audio.currentTime = 0;
+            audio.play();
+
+            audio.onended = () => {
+                if (currentAudio === audio) {
+                    currentAudio = null;
+                }
+            };
+        }
+    </script>
+
+</body>
+
+</html>
